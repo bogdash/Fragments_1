@@ -5,12 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
-import com.bogdash.fragments_1.R
-import com.bogdash.fragments_1.Router
+import com.bogdash.fragments_1.MainActivity
 import com.bogdash.fragments_1.databinding.FragmentBBinding
 
-class FragmentB : Fragment(), Router {
+class FragmentB : Fragment() {
     private lateinit var binding: FragmentBBinding
 
     override fun onCreateView(
@@ -23,31 +21,22 @@ class FragmentB : Fragment(), Router {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnFromBToC.setOnClickListener {
-            showNext()
+        with(binding) {
+            btnFromBToC.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString(MESSAGE_KEY, STRING_FOR_FRAGMENT_C)
+                (requireActivity() as MainActivity).showNext(FragmentC.FRAGMENT_C_TAG, bundle)
+            }
+
+            btnBackToA.setOnClickListener {
+                (requireActivity() as MainActivity).showPrevious(FragmentA.FRAGMENT_A_TAG)
+            }
         }
-
-        binding.btnBackToA.setOnClickListener {
-            showPrevious()
-        }
     }
 
-    override fun showNext() {
-        val fragmentC = FragmentC.newInstance()
-        val bundle = Bundle()
-        bundle.putString(MESSAGE_KEY, getString(R.string.hello_fragment_c))
-        fragmentC.arguments = bundle
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, fragmentC, FragmentC.FRAGMENT_C_TAG)
-            .addToBackStack(FRAGMENT_B_TAG)
-            .commit()
-    }
-
-    override fun showPrevious() {
-        parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-    }
 
     companion object {
+        const val STRING_FOR_FRAGMENT_C = "Hello, Fragment C!"
         const val MESSAGE_KEY = "message"
         const val FRAGMENT_B_TAG = "fragmentB"
 

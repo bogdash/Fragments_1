@@ -5,11 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
-import com.bogdash.fragments_1.Router
+import com.bogdash.fragments_1.MainActivity
 import com.bogdash.fragments_1.databinding.FragmentDBinding
 
-class FragmentD : Fragment(), Router {
+class FragmentD : Fragment() {
     private lateinit var binding: FragmentDBinding
 
     override fun onCreateView(
@@ -24,13 +23,10 @@ class FragmentD : Fragment(), Router {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnFromDToB.setOnClickListener {
-            showNext()
+            (requireActivity() as MainActivity).showPrevious(FragmentB.FRAGMENT_B_TAG)
         }
     }
 
-    override fun showNext() {
-        parentFragmentManager.popBackStack(FragmentB.FRAGMENT_B_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-    }
     companion object {
         const val FRAGMENT_D_TAG = "fragmentD"
 
