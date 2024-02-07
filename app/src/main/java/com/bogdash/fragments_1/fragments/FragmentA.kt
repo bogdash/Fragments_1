@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bogdash.fragments_1.R
+import com.bogdash.fragments_1.Router
 import com.bogdash.fragments_1.databinding.FragmentABinding
 
-class FragmentA : Fragment() {
+class FragmentA : Fragment(), Router {
     private lateinit var binding: FragmentABinding
 
     override fun onCreateView(
@@ -22,19 +23,21 @@ class FragmentA : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnFromAToB.setOnClickListener{
-            navigateToFragmentB()
+            showNext()
         }
     }
 
-    private fun navigateToFragmentB(){
+    override fun showNext() {
         val fragmentB = FragmentB.newInstance()
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view, fragmentB, FragmentB.FRAGMENT_B_TAG)
             .addToBackStack(FRAGMENT_A_TAG)
             .commit()
     }
+
     companion object {
         const val FRAGMENT_A_TAG = "fragmentA"
         fun newInstance() = FragmentA()
     }
+
 }

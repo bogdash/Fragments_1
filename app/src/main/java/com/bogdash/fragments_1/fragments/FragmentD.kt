@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
+import com.bogdash.fragments_1.Router
 import com.bogdash.fragments_1.databinding.FragmentDBinding
 
-class FragmentD : Fragment() {
+class FragmentD : Fragment(), Router {
     private lateinit var binding: FragmentDBinding
 
     override fun onCreateView(
@@ -23,13 +24,13 @@ class FragmentD : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnFromDToB.setOnClickListener {
-            navigateToFragmentB()
+            showNext()
         }
     }
-    private fun navigateToFragmentB() {
+
+    override fun showNext() {
         parentFragmentManager.popBackStack(FragmentB.FRAGMENT_B_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
-
     companion object {
         const val FRAGMENT_D_TAG = "fragmentD"
 

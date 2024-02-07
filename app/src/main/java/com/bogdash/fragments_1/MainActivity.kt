@@ -17,4 +17,5 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container_view, FragmentA.newInstance(), FragmentA.FRAGMENT_A_TAG)
             .commit()
     }
+
 }

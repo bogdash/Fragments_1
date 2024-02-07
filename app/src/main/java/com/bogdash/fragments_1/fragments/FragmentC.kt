@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import com.bogdash.fragments_1.R
+import com.bogdash.fragments_1.Router
 import com.bogdash.fragments_1.databinding.FragmentCBinding
 
-class FragmentC : Fragment() {
+class FragmentC : Fragment(), Router {
     private lateinit var binding: FragmentCBinding
 
     override fun onCreateView(
@@ -30,24 +31,24 @@ class FragmentC : Fragment() {
         }
 
         binding.btnFromCToD.setOnClickListener {
-            navigateToFragmentD()
+            showNext()
         }
 
         binding.btnFromCToA.setOnClickListener {
-            navigateToFragmentA()
+            showPrevious()
         }
     }
 
-    private fun navigateToFragmentD() {
+    override fun showPrevious() {
+        parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+    }
+
+    override fun showNext() {
         val fragmentD = FragmentD.newInstance()
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view, fragmentD, FragmentD.FRAGMENT_D_TAG)
             .addToBackStack(FRAGMENT_C_TAG)
             .commit()
-    }
-
-    private fun navigateToFragmentA() {
-        parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
     companion object {
@@ -56,4 +57,5 @@ class FragmentC : Fragment() {
 
         fun newInstance() = FragmentC()
     }
+
 }

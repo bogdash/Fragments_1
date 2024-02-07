@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import com.bogdash.fragments_1.R
+import com.bogdash.fragments_1.Router
 import com.bogdash.fragments_1.databinding.FragmentBBinding
 
-class FragmentB : Fragment() {
+class FragmentB : Fragment(), Router {
     private lateinit var binding: FragmentBBinding
 
     override fun onCreateView(
@@ -23,15 +24,15 @@ class FragmentB : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnFromBToC.setOnClickListener {
-            navigateToFragmentC()
+            showNext()
         }
 
         binding.btnBackToA.setOnClickListener {
-            navigateToFragmentA()
+            showPrevious()
         }
     }
 
-    private fun navigateToFragmentC() {
+    override fun showNext() {
         val fragmentC = FragmentC.newInstance()
         val bundle = Bundle()
         bundle.putString(MESSAGE_KEY, getString(R.string.hello_fragment_c))
@@ -42,7 +43,7 @@ class FragmentB : Fragment() {
             .commit()
     }
 
-    private fun navigateToFragmentA() {
+    override fun showPrevious() {
         parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
