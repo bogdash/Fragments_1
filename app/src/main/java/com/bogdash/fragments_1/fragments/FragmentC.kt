@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bogdash.fragments_1.R
+import com.bogdash.fragments_1.databinding.FragmentCBinding
 
 class FragmentC : Fragment() {
 
@@ -13,8 +13,11 @@ class FragmentC : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_c, container, false)
+        val binding = FragmentCBinding.inflate(inflater)
+        return binding.root
     }
 
+    companion object {
+        fun newInstance() = FragmentC()
+    }
 }
