@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment_container_view, FragmentA.newInstance())
+            .replace(R.id.fragment_container_view, FragmentA.newInstance(), FragmentA.FRAGMENT_A_TAG)
             .commit()
     }
 }
