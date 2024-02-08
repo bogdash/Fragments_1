@@ -5,13 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import com.bogdash.fragments_1.MainActivity
-import com.bogdash.fragments_1.R
-import com.bogdash.fragments_1.Router
 import com.bogdash.fragments_1.databinding.FragmentCBinding
 
-class FragmentC : Fragment(){
+class FragmentC : Fragment() {
     private lateinit var binding: FragmentCBinding
 
     override fun onCreateView(

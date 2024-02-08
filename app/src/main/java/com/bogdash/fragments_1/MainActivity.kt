@@ -16,13 +16,15 @@ class MainActivity : AppCompatActivity(), Router {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.commit {
-            replace(
-                R.id.fragment_container_view,
-                FragmentA.newInstance(),
-                FragmentA.FRAGMENT_A_TAG
-            )
-            addToBackStack(FragmentA.FRAGMENT_A_TAG)
+        if (supportFragmentManager.findFragmentByTag(FragmentA.FRAGMENT_A_TAG) == null) {
+            supportFragmentManager.commit {
+                replace(
+                    R.id.fragment_container_view,
+                    FragmentA.newInstance(),
+                    FragmentA.FRAGMENT_A_TAG
+                )
+                addToBackStack(FragmentA.FRAGMENT_A_TAG)
+            }
         }
     }
 
@@ -57,10 +59,8 @@ class MainActivity : AppCompatActivity(), Router {
     }
 
     override fun showPrevious(fragmentName: String) {
-        val fragmentManager = supportFragmentManager
-
-        while (fragmentManager.getBackStackEntryAt(fragmentManager.backStackEntryCount - 1).name != fragmentName) {
-            fragmentManager.popBackStackImmediate()
+        while (supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1).name != fragmentName) {
+            supportFragmentManager.popBackStackImmediate()
         }
     }
 }

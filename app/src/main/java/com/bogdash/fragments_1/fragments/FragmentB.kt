@@ -34,7 +34,6 @@ class FragmentB : Fragment() {
         }
     }
 
-
     companion object {
         const val STRING_FOR_FRAGMENT_C = "Hello, Fragment C!"
         const val MESSAGE_KEY = "message"
